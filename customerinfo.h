@@ -7,7 +7,7 @@ class customerInfo
 {
 public:
     customerInfo();
-    dataLogin(QString username, QString password);
+    int dataLogin(QString username, QString password);
     QString getName();
     QString getUsername();
     QString getSurname();

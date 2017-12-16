@@ -29,9 +29,15 @@ private slots:
 
     void on_makeTransferButton_clicked();
 
+    void on_backButton_clicked();
+
+    void on_settingsButton_clicked();
+
+    void on_backSettingsButton_clicked();
+
 public:
-    QString username;
-    QString password;
+    QString username, password;
+    QString amount, recipientName, title, accountNumber;
 
 private:
     Ui::Widget *ui;

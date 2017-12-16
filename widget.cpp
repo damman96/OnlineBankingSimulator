@@ -26,11 +26,9 @@ Widget::~Widget()
 
 void Widget::on_loginButton_clicked()
 {
-    QString txt, _name, _surname, _username, _balanceString;
-    double _balance;
     username = ui->usernameEdit->text();
     password = ui->passwordEdit->text();
-    //zmienic bool na int bo potrzebne wiele przypadkow
+
     int check = ci.dataLogin(username, password);
 
     if(check == 0)
@@ -40,19 +38,19 @@ void Widget::on_loginButton_clicked()
         ui->stackedWidget->addWidget(ui->mainPage);
         ui->stackedWidget->setCurrentWidget(ui->mainPage);
 
-        _name = ci.getName();
-        _surname = ci.getSurname();
-        txt = "Zalogowany jako: " + _name + " " + _surname;
+        QString _name = ci.getName();
+        QString _surname = ci.getSurname();
+        QString txt = "Zalogowany jako: " + _name + " " + _surname;
         ui->clientLabel->setText(txt);
-        _username = ci.getUsername();
+        QString _username = ci.getUsername();
         ui->idlabel->setText("Nr klienta: " + _username);
-        _balance = ci.getBalance();
-        _balanceString=QString::number(_balance);
+        double _balance = ci.getBalance();
+        QString _balanceString=QString::number(_balance);
         ui->balanceLabel->setText(_balanceString);
 
         QSqlQueryModel * modal = new QSqlQueryModel();
         QSqlQuery qry;
-        qry.prepare("SELECT DATE, FROM_WHO, TITLE, KIND_OF_OPERATION, AMOUNT FROM transactions WHERE USERNAME='"+username+"'");
+        qry.prepare("SELECT DATE, FROM_WHO, TITLE, KIND_OF_OPERATION, AMOUNT FROM transactions WHERE USERNAME='"+username+"' ORDER BY DATE ASC");
         qry.exec();
         modal->setQuery(qry);
         modal->setHeaderData(0,Qt::Horizontal,"Data");
@@ -62,8 +60,6 @@ void Widget::on_loginButton_clicked()
         modal->setHeaderData(4,Qt::Horizontal,"Kwota");
         ui->transactionTable->setModel(modal);
         ui->transactionTable->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-
-
     }
     else if(check == -1)
     {
@@ -86,6 +82,16 @@ void Widget::on_loginButton_clicked()
 
 void Widget::on_logoutButton_clicked()
 {
+    ui->mainPage->hide();
+    ui->loginPage->show();
+    ui->stackedWidget->addWidget(ui->loginPage);
+    ui->stackedWidget->setCurrentWidget(ui->loginPage);
+
+    ui->errorLabel->setText("Wylogowano pomyślnie!");
+    username = "";
+    password = "";
+    ui->usernameEdit->setText("");
+    ui->passwordEdit->setText("");
 
 }
 
@@ -107,9 +113,38 @@ void Widget::on_transferButton_clicked()
     ui->limitHeightLabel_2->setText(_operationsLimitString);
     QString currentDate = ti.getCurrentDate();
     ui->dateEdit->setText(currentDate);
+
+    amount = ui->amountEdit->text();
+    recipientName = ui->recipientEdit->text();
+    title = ui->titleEdit->text();
+    accountNumber = ui->accountEdit->text();
 }
 
 void Widget::on_makeTransferButton_clicked()
 {
 
+}
+
+void Widget::on_backButton_clicked()
+{
+    ui->transferPage->hide();
+    ui->mainPage->show();
+    ui->stackedWidget->addWidget(ui->mainPage);
+    ui->stackedWidget->setCurrentWidget(ui->mainPage);
+}
+
+void Widget::on_settingsButton_clicked()
+{
+    ui->mainPage->hide();
+    ui->settingsPage->show();
+    ui->stackedWidget->addWidget(ui->settingsPage);
+    ui->stackedWidget->setCurrentWidget(ui->settingsPage);
+}
+
+void Widget::on_backSettingsButton_clicked()
+{
+    ui->settingsPage->hide();
+    ui->mainPage->show();
+    ui->stackedWidget->addWidget(ui->mainPage);
+    ui->stackedWidget->setCurrentWidget(ui->mainPage);
 }

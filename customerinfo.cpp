@@ -6,7 +6,7 @@ customerInfo::customerInfo()
 
 }
 
-customerInfo::dataLogin(QString username, QString password)
+int customerInfo::dataLogin(QString username, QString password)
 {
     QSqlQuery qry;
 

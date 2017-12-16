@@ -6,6 +6,11 @@ transactioninfo::transactioninfo()
 
 }
 
+int transactioninfo::dataTransaction()
+{
+
+}
+
 QString transactioninfo::getCurrentDate()
 {
     QDate currentDate = QDate::currentDate();

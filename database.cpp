@@ -3,7 +3,7 @@
 bool database::connection_open()
 {
     mydb =QSqlDatabase::addDatabase("QSQLITE");
-    mydb.setDatabaseName("C:/Users/Damian/Desktop/project/customers.sqlite");
+    mydb.setDatabaseName("C:/Users/Damian/Desktop/OnlineBankingSimulator/customers.sqlite");
 
     if(!mydb.open())
     {
