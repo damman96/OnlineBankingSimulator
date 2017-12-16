@@ -8,6 +8,7 @@ class customerInfo
 public:
     customerInfo();
     int dataLogin(QString username, QString password);
+    bool changePassword(QString password,QString oldPassword,QString newPassword);
     QString getName();
     QString getUsername();
     QString getSurname();

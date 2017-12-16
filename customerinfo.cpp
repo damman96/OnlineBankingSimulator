@@ -49,6 +49,17 @@ int customerInfo::dataLogin(QString username, QString password)
     }
 }
 
+bool customerInfo::changePassword(QString password,QString oldPassword,QString newPassword)
+{
+    if(oldPassword==password)
+    {
+        QSqlQuery qry;
+        qry.exec("UPDATE customers SET PASSWORD = '"+newPassword+"' WHERE PASSWORD = '"+password+"'");
+        return true;
+    }
+    else return false;
+}
+
 QString customerInfo::getUsername()
 {
     return _username;

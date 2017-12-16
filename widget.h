@@ -35,9 +35,12 @@ private slots:
 
     void on_backSettingsButton_clicked();
 
+    void on_passwordChangeButton_clicked();
+
 public:
     QString username, password;
     QString amount, recipientName, title, accountNumber;
+    QString oldPassword, newPassword;
 
 private:
     Ui::Widget *ui;

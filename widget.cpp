@@ -148,3 +148,29 @@ void Widget::on_backSettingsButton_clicked()
     ui->stackedWidget->addWidget(ui->mainPage);
     ui->stackedWidget->setCurrentWidget(ui->mainPage);
 }
+
+void Widget::on_passwordChangeButton_clicked()
+{
+    oldPassword = ui->oldPasswordEdit->text();
+    newPassword = ui->newPasswordEdit->text();
+
+    bool check = ci.changePassword(password, oldPassword, newPassword);
+
+    if(check==true)
+    {
+        ui->passwordStatusLabel->setText("Pomyślnie zmieniono hasło!");
+        oldPassword="";
+        newPassword="";
+        ui->oldPasswordEdit->setText("");
+        ui->newPasswordEdit->setText("");
+    }
+    else
+    {
+        ui->passwordStatusLabel->setText("Zmiana hasła nieudana. Spróbuj ponownie!");
+        oldPassword="";
+        newPassword="";
+        ui->oldPasswordEdit->setText("");
+        ui->newPasswordEdit->setText("");
+    }
+
+}
