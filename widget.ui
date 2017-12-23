@@ -133,6 +133,38 @@
       <number>2</number>
      </property>
     </widget>
+    <widget class="QLabel" name="usernameLabel">
+     <property name="geometry">
+      <rect>
+       <x>50</x>
+       <y>450</y>
+       <width>80</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Nr Klienta:</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="passwordLabel">
+     <property name="geometry">
+      <rect>
+       <x>50</x>
+       <y>490</y>
+       <width>80</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Hasło:</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+    </widget>
    </widget>
    <widget class="QWidget" name="mainPage">
     <widget class="QLabel" name="clientLabel">
@@ -487,7 +519,7 @@
       <rect>
        <x>830</x>
        <y>250</y>
-       <width>200</width>
+       <width>240</width>
        <height>30</height>
       </rect>
      </property>
@@ -500,7 +532,7 @@
       <rect>
        <x>830</x>
        <y>290</y>
-       <width>200</width>
+       <width>240</width>
        <height>30</height>
       </rect>
      </property>
@@ -513,7 +545,7 @@
       <rect>
        <x>830</x>
        <y>330</y>
-       <width>200</width>
+       <width>240</width>
        <height>30</height>
       </rect>
      </property>
@@ -760,6 +792,48 @@
      </property>
      <property name="text">
       <string>Powrót</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="accountDescLabel">
+     <property name="geometry">
+      <rect>
+       <x>190</x>
+       <y>230</y>
+       <width>80</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Arial</family>
+      </font>
+     </property>
+     <property name="text">
+      <string>Z rachunku:</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="accountSenderLabel">
+     <property name="geometry">
+      <rect>
+       <x>280</x>
+       <y>230</y>
+       <width>235</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Arial</family>
+      </font>
+     </property>
+     <property name="text">
+      <string>Nr konta nadawcy</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
      </property>
     </widget>
    </widget>

@@ -108,21 +108,25 @@ void Widget::on_transferButton_clicked()
     QString _transactionsLimitString = QString::number(_transactionsLimit);
     int _operationsLimit = ci.getOperationsLimit();
     QString _operationsLimitString = QString::number(_operationsLimit);
+    QString accountSenderNumber = ci.getAccountNumber();
+
+    currentDate = ti.getCurrentDate();
     ui->balanceLabel_2->setText(_balanceString);
     ui->limitHeightLabel->setText(_transactionsLimitString);
     ui->limitHeightLabel_2->setText(_operationsLimitString);
-    QString currentDate = ti.getCurrentDate();
-    ui->dateEdit->setText(currentDate);
-
-    amount = ui->amountEdit->text();
-    recipientName = ui->recipientEdit->text();
-    title = ui->titleEdit->text();
-    accountNumber = ui->accountEdit->text();
+    ui->accountSenderLabel->setText(accountSenderNumber);
+    ui->dateEdit->setText(currentDate);    
 }
 
 void Widget::on_makeTransferButton_clicked()
 {
+    amountString = ui->amountEdit->text();
+    amount = amountString.toDouble();
+    recipientString = ui->recipientEdit->text();
+    title = ui->titleEdit->text();
+    recipientAccountNumber = ui->accountEdit->text();
 
+    ti.getRecipientData(currentDate, amount, recipientString, title, recipientAccountNumber);
 }
 
 void Widget::on_backButton_clicked()
