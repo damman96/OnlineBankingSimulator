@@ -265,10 +265,10 @@
     <widget class="QTableView" name="transactionTable">
      <property name="geometry">
       <rect>
-       <x>300</x>
+       <x>150</x>
        <y>200</y>
-       <width>800</width>
-       <height>300</height>
+       <width>1100</width>
+       <height>400</height>
       </rect>
      </property>
      <property name="font">

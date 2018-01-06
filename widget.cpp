@@ -50,14 +50,15 @@ void Widget::on_loginButton_clicked()
 
         QSqlQueryModel * modal = new QSqlQueryModel();
         QSqlQuery qry;
-        qry.prepare("SELECT DATE, FROM_WHO, TITLE, KIND_OF_OPERATION, AMOUNT FROM transactions WHERE USERNAME='"+username+"' ORDER BY DATE ASC");
+        qry.prepare("SELECT DATE, PERSON, ACCNUMBER, TITLE, KINDofoper, AMOUNT FROM transactions WHERE USERNAME='"+username+"' ORDER BY DATE ASC");
         qry.exec();
         modal->setQuery(qry);
         modal->setHeaderData(0,Qt::Horizontal,"Data");
         modal->setHeaderData(1,Qt::Horizontal,"Nadawca/ Odbiorca");
-        modal->setHeaderData(2,Qt::Horizontal,"Tytuł");
-        modal->setHeaderData(3,Qt::Horizontal,"Rodzaj operacji");
-        modal->setHeaderData(4,Qt::Horizontal,"Kwota");
+        modal->setHeaderData(2,Qt::Horizontal,"Nr konta");
+        modal->setHeaderData(3,Qt::Horizontal,"Tytuł");
+        modal->setHeaderData(4,Qt::Horizontal,"Rodzaj operacji");
+        modal->setHeaderData(5,Qt::Horizontal,"Kwota");
         ui->transactionTable->setModel(modal);
         ui->transactionTable->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     }
