@@ -23,12 +23,14 @@ private:
     QString _username;
     QString _name;
     QString _surname;
-    double _balance;
     QString _accountNumber;
+    double _balance;
     int _transactionsLimit;
     int _operationsLimit;
     int _credit;
     int _nowl;
+    double _transactions;
+    int _operations;
 };
 
 #endif // CUSTOMERINFO_H

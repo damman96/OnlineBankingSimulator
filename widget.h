@@ -39,8 +39,13 @@ private slots:
 
 public:
     QString username, password;
+
+    QString _name, _username, _surname, _accountNumber;
+    double _balance;
+
     QString amountString, recipientString, title,  recipientAccountNumber, currentDate;
     double amount;
+
     QString oldPassword, newPassword;
 
 private:

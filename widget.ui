@@ -76,6 +76,9 @@
      <property name="text">
       <string>LOGIN</string>
      </property>
+     <property name="autoDefault">
+      <bool>true</bool>
+     </property>
     </widget>
     <widget class="QLineEdit" name="usernameEdit">
      <property name="geometry">
@@ -578,6 +581,9 @@
      <property name="alignment">
       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
      </property>
+     <property name="readOnly">
+      <bool>true</bool>
+     </property>
     </widget>
     <widget class="QLabel" name="amountLabel">
      <property name="geometry">
@@ -836,10 +842,51 @@
       <set>Qt::AlignCenter</set>
      </property>
     </widget>
+    <zorder>recipientNameLabel</zorder>
+    <zorder>accountLabel</zorder>
+    <zorder>titleLabel</zorder>
+    <zorder>recipientEdit</zorder>
+    <zorder>titleEdit</zorder>
+    <zorder>accountEdit</zorder>
+    <zorder>dateEdit</zorder>
+    <zorder>amountLabel</zorder>
+    <zorder>datelabel</zorder>
+    <zorder>PLNLabel</zorder>
+    <zorder>availableFundsLabel</zorder>
+    <zorder>limitLabel</zorder>
+    <zorder>balanceLabel_2</zorder>
+    <zorder>limitHeightLabel</zorder>
+    <zorder>makeTransferButton</zorder>
+    <zorder>limitLabel_2</zorder>
+    <zorder>limitHeightLabel_2</zorder>
+    <zorder>backButton</zorder>
+    <zorder>accountDescLabel</zorder>
+    <zorder>accountSenderLabel</zorder>
+    <zorder>amountEdit</zorder>
    </widget>
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <tabstops>
+  <tabstop>usernameEdit</tabstop>
+  <tabstop>passwordEdit</tabstop>
+  <tabstop>loginButton</tabstop>
+  <tabstop>transferButton</tabstop>
+  <tabstop>settingsButton</tabstop>
+  <tabstop>logoutButton</tabstop>
+  <tabstop>amountEdit</tabstop>
+  <tabstop>recipientEdit</tabstop>
+  <tabstop>titleEdit</tabstop>
+  <tabstop>accountEdit</tabstop>
+  <tabstop>makeTransferButton</tabstop>
+  <tabstop>backButton</tabstop>
+  <tabstop>oldPasswordEdit</tabstop>
+  <tabstop>newPasswordEdit</tabstop>
+  <tabstop>passwordChangeButton</tabstop>
+  <tabstop>backSettingsButton</tabstop>
+  <tabstop>dateEdit</tabstop>
+  <tabstop>transactionTable</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

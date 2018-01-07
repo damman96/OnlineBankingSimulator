@@ -10,7 +10,7 @@ int customerInfo::dataLogin(QString username, QString password)
 {
     QSqlQuery qry;
 
-    if(qry.exec("SELECT USERNAME, PASSWORD, NAME, SURNAME, BALANCE, TRANSACTIONS_LIMIT, ACCOUNT_NUMBER, OPERATIONS_LIMIT, CREDIT, NOWL FROM customers WHERE USERNAME='"+username+"' AND PASSWORD='"+password+"'"))
+    if(qry.exec("SELECT USERNAME, PASSWORD, NAME, SURNAME, BALANCE, TRANSACTIONS_LIMIT, ACCOUNT_NUMBER, OPERATIONS_LIMIT, CREDIT, NOWL, TRANSACTIONS, OPERATIONS FROM customers WHERE USERNAME='"+username+"' AND PASSWORD='"+password+"'"))
     {
         if(qry.next())
         {                            
@@ -23,6 +23,8 @@ int customerInfo::dataLogin(QString username, QString password)
             _operationsLimit = qry.value(7).toInt();
             _credit = qry.value(8).toInt();
             _nowl = qry.value(9).toInt();
+            _transactions = qry.value(10).toDouble();
+            _operations = qry.value(11).toInt();
 
             if(_nowl < defNOWL)
                 return 0;

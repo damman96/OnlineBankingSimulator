@@ -38,19 +38,19 @@ void Widget::on_loginButton_clicked()
         ui->stackedWidget->addWidget(ui->mainPage);
         ui->stackedWidget->setCurrentWidget(ui->mainPage);
 
-        QString _name = ci.getName();
-        QString _surname = ci.getSurname();
+        _name = ci.getName();
+        _surname = ci.getSurname();
         QString txt = "Zalogowany jako: " + _name + " " + _surname;
         ui->clientLabel->setText(txt);
-        QString _username = ci.getUsername();
+        _username = ci.getUsername();
         ui->idlabel->setText("Nr klienta: " + _username);
-        double _balance = ci.getBalance();
+        _balance = ci.getBalance();
         QString _balanceString=QString::number(_balance);
         ui->balanceLabel->setText(_balanceString);
 
         QSqlQueryModel * modal = new QSqlQueryModel();
         QSqlQuery qry;
-        qry.prepare("SELECT DATE, PERSON, ACCNUMBER, TITLE, KINDofoper, AMOUNT FROM transactions WHERE USERNAME='"+username+"' ORDER BY DATE ASC");
+        qry.prepare("SELECT DATE, PERSON, ACCNUMBER, TITLE, KINDOFOPER, AMOUNT FROM transactions WHERE USERNAME='"+username+"' ORDER BY DATE ASC");
         qry.exec();
         modal->setQuery(qry);
         modal->setHeaderData(0,Qt::Horizontal,"Data");
@@ -109,13 +109,13 @@ void Widget::on_transferButton_clicked()
     QString _transactionsLimitString = QString::number(_transactionsLimit);
     int _operationsLimit = ci.getOperationsLimit();
     QString _operationsLimitString = QString::number(_operationsLimit);
-    QString accountSenderNumber = ci.getAccountNumber();
+    _accountNumber = ci.getAccountNumber();
 
     currentDate = ti.getCurrentDate();
     ui->balanceLabel_2->setText(_balanceString);
     ui->limitHeightLabel->setText(_transactionsLimitString);
     ui->limitHeightLabel_2->setText(_operationsLimitString);
-    ui->accountSenderLabel->setText(accountSenderNumber);
+    ui->accountSenderLabel->setText(_accountNumber);
     ui->dateEdit->setText(currentDate);    
 }
 
@@ -127,7 +127,12 @@ void Widget::on_makeTransferButton_clicked()
     title = ui->titleEdit->text();
     recipientAccountNumber = ui->accountEdit->text();
 
-    ti.getRecipientData(currentDate, amount, recipientString, title, recipientAccountNumber);
+    ti.getRecipientData(recipientAccountNumber);
+    ti.getSenderData(_name, _username, _surname, _accountNumber, _balance);
+    ti.updateRecipient(amount, recipientAccountNumber);
+    ti.updateSender(amount, _accountNumber);
+    ti.updateRecipientTransactions(amount, title);
+    ti.updateSenderTransactions(amount, title, recipientString);
 }
 
 void Widget::on_backButton_clicked()
