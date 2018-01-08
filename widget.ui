@@ -335,7 +335,7 @@
       <rect>
        <x>190</x>
        <y>220</y>
-       <width>130</width>
+       <width>160</width>
        <height>30</height>
       </rect>
      </property>
@@ -351,7 +351,7 @@
       <rect>
        <x>190</x>
        <y>270</y>
-       <width>130</width>
+       <width>160</width>
        <height>30</height>
       </rect>
      </property>
@@ -367,7 +367,7 @@
       <rect>
        <x>190</x>
        <y>180</y>
-       <width>131</width>
+       <width>130</width>
        <height>30</height>
       </rect>
      </property>
@@ -394,9 +394,9 @@
     <widget class="QPushButton" name="passwordChangeButton">
      <property name="geometry">
       <rect>
-       <x>200</x>
+       <x>210</x>
        <y>320</y>
-       <width>110</width>
+       <width>120</width>
        <height>30</height>
       </rect>
      </property>
@@ -407,9 +407,9 @@
     <widget class="QLabel" name="oldPasswordLabel">
      <property name="geometry">
       <rect>
-       <x>50</x>
+       <x>80</x>
        <y>220</y>
-       <width>131</width>
+       <width>100</width>
        <height>30</height>
       </rect>
      </property>
@@ -423,9 +423,9 @@
     <widget class="QLabel" name="passwordChangeLabel_3">
      <property name="geometry">
       <rect>
-       <x>50</x>
+       <x>80</x>
        <y>270</y>
-       <width>131</width>
+       <width>100</width>
        <height>30</height>
       </rect>
      </property>
@@ -439,9 +439,106 @@
     <widget class="QLabel" name="passwordStatusLabel">
      <property name="geometry">
       <rect>
-       <x>100</x>
+       <x>90</x>
        <y>370</y>
-       <width>300</width>
+       <width>360</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="transactionsLimitLabel">
+     <property name="geometry">
+      <rect>
+       <x>550</x>
+       <y>180</y>
+       <width>160</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Zmiana limitu transakcji</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="oldTransactionLimitEdit">
+     <property name="geometry">
+      <rect>
+       <x>560</x>
+       <y>220</y>
+       <width>140</width>
+       <height>30</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="newTransactionLimitEdit">
+     <property name="geometry">
+      <rect>
+       <x>560</x>
+       <y>270</y>
+       <width>140</width>
+       <height>30</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="oldLimitLabel">
+     <property name="geometry">
+      <rect>
+       <x>430</x>
+       <y>220</y>
+       <width>120</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Poprzedni limit:</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="newLimitLabel">
+     <property name="geometry">
+      <rect>
+       <x>430</x>
+       <y>270</y>
+       <width>120</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Nowy limit:</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="limitChangeButton">
+     <property name="geometry">
+      <rect>
+       <x>570</x>
+       <y>320</y>
+       <width>120</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Zmień limit</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="transactionsStatusLabel">
+     <property name="geometry">
+      <rect>
+       <x>450</x>
+       <y>370</y>
+       <width>360</width>
        <height>30</height>
       </rect>
      </property>

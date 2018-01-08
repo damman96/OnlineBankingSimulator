@@ -211,3 +211,29 @@ void Widget::on_passwordChangeButton_clicked()
     }
 
 }
+
+void Widget::on_limitChangeButton_clicked()
+{
+    oldLimit = ui->oldTransactionLimitEdit->text();
+    newLimit = ui->newTransactionLimitEdit->text();
+
+    bool check = ci.changeTransactionsLimit(_username, oldLimit, newLimit);
+
+    if(check==true)
+    {
+        ui->transactionsStatusLabel->setText("Pomyślnie zmieniono limit transakcji!");
+        oldLimit="";
+        newLimit="";
+        ui->oldTransactionLimitEdit->setText("");
+        ui->newTransactionLimitEdit->setText("");
+    }
+    else
+    {
+        ui->transactionsStatusLabel->setText("Zmiana limitu transakcji nieudana. Spróbuj ponownie później!");
+        oldLimit="";
+        newLimit="";
+        ui->oldTransactionLimitEdit->setText("");
+        ui->newTransactionLimitEdit->setText("");
+    }
+
+}

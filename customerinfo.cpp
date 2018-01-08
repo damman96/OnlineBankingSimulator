@@ -62,6 +62,17 @@ bool customerInfo::changePassword(QString password,QString oldPassword,QString n
     else return false;
 }
 
+bool customerInfo::changeTransactionsLimit(QString username, QString oldLimit, QString newLimit)
+{
+    if(oldLimit!=newLimit && newLimit!="0")
+    {
+        QSqlQuery qry;
+        qry.exec("UPDATE customers SET TRANSACTIONS_LIMIT = '"+newLimit+"' WHERE USERNAME = '"+username+"'");
+        return true;
+    }
+    else return false;
+}
+
 QString customerInfo::getUsername()
 {
     return _username;
