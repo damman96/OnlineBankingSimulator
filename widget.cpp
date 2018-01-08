@@ -156,10 +156,6 @@ void Widget::on_makeTransferButton_clicked()
     {
         ui->transferStatusLabel->setText("Nie masz wystarczających środków na koncie!");
     }
-
-
-
-
 }
 
 void Widget::on_backButton_clicked()
@@ -229,11 +225,37 @@ void Widget::on_limitChangeButton_clicked()
     }
     else
     {
-        ui->transactionsStatusLabel->setText("Zmiana limitu transakcji nieudana. Spróbuj ponownie później!");
+        ui->transactionsStatusLabel->setText("Zmiana limitu transakcji nieudana. Spróbuj ponownie!");
         oldLimit="";
         newLimit="";
         ui->oldTransactionLimitEdit->setText("");
         ui->newTransactionLimitEdit->setText("");
+    }
+
+}
+
+void Widget::on_limitOperationChangeButton_clicked()
+{
+    oldOperLimit = ui->oldOperationLimitEdit->text();
+    newOperLimit = ui->newOperationLimitEdit->text();
+
+    bool check = ci.changeOperationsLimit(_username, oldOperLimit, newOperLimit);
+
+    if(check==true)
+    {
+        ui->operationsStatusLabel->setText("Pomyślnie zmieniono limit operacji!");
+        oldOperLimit="";
+        newOperLimit="";
+        ui->oldOperationLimitEdit->setText("");
+        ui->newOperationLimitEdit->setText("");
+    }
+    else
+    {
+        ui->operationsStatusLabel->setText("Zmiana limitu operacji nieudana. Spróbuj ponownie!");
+        oldOperLimit="";
+        newOperLimit="";
+        ui->oldOperationLimitEdit->setText("");
+        ui->newOperationLimitEdit->setText("");
     }
 
 }

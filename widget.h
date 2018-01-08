@@ -39,6 +39,8 @@ private slots:
 
     void on_limitChangeButton_clicked();
 
+    void on_limitOperationChangeButton_clicked();
+
 public:
     QString username, password;
 
@@ -53,7 +55,7 @@ public:
     double transactionsLimit, transactions;
     int operationsLimit, operations;
 
-    QString oldLimit, newLimit;
+    QString oldLimit, newLimit, oldOperLimit, newOperLimit;
 
 private:
     Ui::Widget *ui;

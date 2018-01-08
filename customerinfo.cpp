@@ -73,6 +73,17 @@ bool customerInfo::changeTransactionsLimit(QString username, QString oldLimit, Q
     else return false;
 }
 
+bool customerInfo::changeOperationsLimit(QString username, QString oldLimit, QString newLimit)
+{
+    if(oldLimit!=newLimit && newLimit!="0")
+    {
+        QSqlQuery qry;
+        qry.exec("UPDATE customers SET OPERATIONS_LIMIT = '"+newLimit+"' WHERE USERNAME = '"+username+"'");
+        return true;
+    }
+    else return false;
+}
+
 QString customerInfo::getUsername()
 {
     return _username;

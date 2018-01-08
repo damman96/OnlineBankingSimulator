@@ -10,6 +10,7 @@ public:
     int dataLogin(QString username, QString password);
     bool changePassword(QString password,QString oldPassword,QString newPassword);
     bool changeTransactionsLimit(QString username, QString oldLimit, QString newLimit);
+    bool changeOperationsLimit(QString username, QString oldLimit, QString newLimit);
     QString getName();
     QString getUsername();
     QString getSurname();

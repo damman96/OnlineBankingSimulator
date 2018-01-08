@@ -549,6 +549,103 @@
       <set>Qt::AlignCenter</set>
      </property>
     </widget>
+    <widget class="QLabel" name="operationsLimitLabel">
+     <property name="geometry">
+      <rect>
+       <x>900</x>
+       <y>180</y>
+       <width>160</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Zmiana limitu operacji</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="oldLimitLabel_2">
+     <property name="geometry">
+      <rect>
+       <x>780</x>
+       <y>220</y>
+       <width>120</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Poprzedni limit:</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="oldOperationLimitEdit">
+     <property name="geometry">
+      <rect>
+       <x>910</x>
+       <y>220</y>
+       <width>140</width>
+       <height>30</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="newLimitLabel_2">
+     <property name="geometry">
+      <rect>
+       <x>780</x>
+       <y>270</y>
+       <width>120</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Nowy limit:</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="newOperationLimitEdit">
+     <property name="geometry">
+      <rect>
+       <x>910</x>
+       <y>270</y>
+       <width>140</width>
+       <height>30</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="limitOperationChangeButton">
+     <property name="geometry">
+      <rect>
+       <x>920</x>
+       <y>320</y>
+       <width>120</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Zmień Limit</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="operationsStatusLabel">
+     <property name="geometry">
+      <rect>
+       <x>810</x>
+       <y>370</y>
+       <width>360</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
    </widget>
    <widget class="QWidget" name="transferPage">
     <widget class="QLabel" name="recipientNameLabel">
