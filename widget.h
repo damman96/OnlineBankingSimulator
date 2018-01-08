@@ -48,6 +48,9 @@ public:
 
     QString oldPassword, newPassword;
 
+    double transactionsLimit, transactions;
+    int operationsLimit, operations;
+
 private:
     Ui::Widget *ui;
     database db;

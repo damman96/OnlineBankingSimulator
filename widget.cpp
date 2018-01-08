@@ -105,10 +105,10 @@ void Widget::on_transferButton_clicked()
 
     double _balance = ci.getBalance();
     QString _balanceString = QString::number(_balance);
-    int _transactionsLimit = ci.getTransactionsLimit();
-    QString _transactionsLimitString = QString::number(_transactionsLimit);
-    int _operationsLimit = ci.getOperationsLimit();
-    QString _operationsLimitString = QString::number(_operationsLimit);
+    transactionsLimit = ci.getTransactionsLimit();
+    QString _transactionsLimitString = QString::number(transactionsLimit);
+    operationsLimit = ci.getOperationsLimit();
+    QString _operationsLimitString = QString::number(operationsLimit);
     _accountNumber = ci.getAccountNumber();
 
     currentDate = ti.getCurrentDate();
@@ -127,12 +127,39 @@ void Widget::on_makeTransferButton_clicked()
     title = ui->titleEdit->text();
     recipientAccountNumber = ui->accountEdit->text();
 
-    ti.getRecipientData(recipientAccountNumber);
-    ti.getSenderData(_name, _username, _surname, _accountNumber, _balance);
-    ti.updateRecipient(amount, recipientAccountNumber);
-    ti.updateSender(amount, _accountNumber);
-    ti.updateRecipientTransactions(amount, title);
-    ti.updateSenderTransactions(amount, title, recipientString);
+    transactions = ci.getTransactions();
+    operations = ci.getOperations();
+
+    bool check = ti.checkAccountBalance(_balance, amount);
+
+    if(check == true)
+    {
+        if(transactions < transactionsLimit && operations < operationsLimit)
+        {
+            ti.getRecipientData(recipientAccountNumber);
+            ti.getSenderData(_name, _username, _surname, _accountNumber, _balance, transactions, operations);
+            ti.updateRecipient(amount, recipientAccountNumber);
+            ti.updateSender(amount, _accountNumber);
+            ti.updateRecipientTransactions(amount, title);
+            ti.updateSenderTransactions(amount, title, recipientString);
+            ti.updateTransactions(_username);
+            ti.updateOperations(_username);
+
+            ui->transferStatusLabel->setText("Przelew wykonany pomyślnie!");
+        }
+        else
+        {
+            ui->transferStatusLabel->setText("Przekroczono dzienny limit wysokości transakcji lub operacji");
+        }
+    }
+    else
+    {
+        ui->transferStatusLabel->setText("Nie masz wystarczających środków na koncie!");
+    }
+
+
+
+
 }
 
 void Widget::on_backButton_clicked()

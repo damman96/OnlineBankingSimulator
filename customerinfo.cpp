@@ -87,14 +87,24 @@ QString customerInfo::getAccountNumber()
     return _accountNumber;
 }
 
-int customerInfo::getTransactionsLimit()
+double customerInfo::getTransactionsLimit()
 {
     return _transactionsLimit;
+}
+
+double customerInfo::getTransactions()
+{
+    return _transactions;
 }
 
 int customerInfo::getOperationsLimit()
 {
     return _operationsLimit;
+}
+
+int customerInfo::getOperations()
+{
+    return _operations;
 }
 
 int customerInfo::getCredit()

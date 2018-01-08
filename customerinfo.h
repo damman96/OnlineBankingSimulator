@@ -14,8 +14,10 @@ public:
     QString getSurname();
     double getBalance();
     QString getAccountNumber();
-    int getTransactionsLimit();
+    double getTransactionsLimit();
+    double getTransactions();
     int getOperationsLimit();
+    int getOperations();
     int getCredit();
 
 private:

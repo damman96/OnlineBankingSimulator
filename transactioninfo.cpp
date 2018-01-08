@@ -6,6 +6,13 @@ transactioninfo::transactioninfo()
 
 }
 
+bool transactioninfo::checkAccountBalance(double balance, double amount)
+{
+    if(balance >= amount)
+        return true;
+    else return false;
+}
+
 void transactioninfo::getRecipientData(QString accountNumber)
 {
     QSqlQuery qry;
@@ -21,14 +28,33 @@ void transactioninfo::getRecipientData(QString accountNumber)
     }
 }
 
-void transactioninfo::getSenderData(QString senderName, QString senderUsername, QString senderSurname, QString senderAccNumber, double senderBalance)
+void transactioninfo::getSenderData(QString senderName, QString senderUsername, QString senderSurname, QString senderAccNumber, double senderBalance, int senderTransactions, int senderOperations)
 {
     _senderName = senderName;
     _senderUsername = senderUsername;
     _senderSurname = senderSurname;
     _senderAccNumber = senderAccNumber;
     _senderBalance = senderBalance;
+    _senderTransactions = senderTransactions;
+    _senderOperations = senderOperations;
 
+}
+
+void transactioninfo::updateTransactions(QString Username)
+{
+    _senderTransactions+=1;
+    QString transactionsString = QString::number(_senderTransactions);
+    QSqlQuery qry;
+    qry.exec("UPDATE customers SET TRANSACTIONS='"+transactionsString+"' WHERE USERNAME='"+Username+"'");
+
+}
+
+void transactioninfo::updateOperations(QString Username)
+{
+    _senderOperations+=1;
+    QString operationsString = QString::number(_senderOperations);
+    QSqlQuery qry;
+    qry.exec("UPDATE customers SET OPERATIONS='"+operationsString+"' WHERE USERNAME='"+Username+"'");
 }
 
 void transactioninfo::updateRecipient(double amount, QString accountNumber)
