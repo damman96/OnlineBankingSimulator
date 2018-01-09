@@ -110,6 +110,17 @@ void transactioninfo::updateSenderTransactions(double amount, QString title, QSt
 QString transactioninfo::getCurrentDate()
 {
     QDate currentDate = QDate::currentDate();
-    QString _currentDate = currentDate.toString(Qt::SystemLocaleShortDate);
-    return _currentDate;
+    QString currDate;
+
+    int day = currentDate.day();
+    int month = currentDate.month();
+    int year = currentDate.year();
+
+    QString dayStr = QString::number(day);
+    QString monthStr = QString::number(month);
+    QString yearStr = QString::number(year);
+
+    currDate = yearStr + "-" + monthStr + "-" + dayStr;
+
+    return currDate;
 }

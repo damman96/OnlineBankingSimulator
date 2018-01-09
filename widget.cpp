@@ -50,7 +50,7 @@ void Widget::on_loginButton_clicked()
 
         QSqlQueryModel * modal = new QSqlQueryModel();
         QSqlQuery qry;
-        qry.prepare("SELECT DATE, PERSON, ACCNUMBER, TITLE, KINDOFOPER, AMOUNT FROM transactions WHERE USERNAME='"+username+"' ORDER BY DATE ASC");
+        qry.prepare("SELECT DATE, PERSON, ACCNUMBER, TITLE, KINDOFOPER, AMOUNT FROM transactions WHERE USERNAME='"+username+"' ORDER BY DATE DESC");
         qry.exec();
         modal->setQuery(qry);
         modal->setHeaderData(0,Qt::Horizontal,"Data");
@@ -93,7 +93,6 @@ void Widget::on_logoutButton_clicked()
     password = "";
     ui->usernameEdit->setText("");
     ui->passwordEdit->setText("");
-
 }
 
 void Widget::on_transferButton_clicked()
@@ -159,8 +158,8 @@ void Widget::on_makeTransferButton_clicked()
 }
 
 void Widget::on_backButton_clicked()
-{
-    ui->transferPage->hide();
+{    
+    ui->loginPage->hide();
     ui->mainPage->show();
     ui->stackedWidget->addWidget(ui->mainPage);
     ui->stackedWidget->setCurrentWidget(ui->mainPage);
@@ -231,7 +230,6 @@ void Widget::on_limitChangeButton_clicked()
         ui->oldTransactionLimitEdit->setText("");
         ui->newTransactionLimitEdit->setText("");
     }
-
 }
 
 void Widget::on_limitOperationChangeButton_clicked()
@@ -257,5 +255,4 @@ void Widget::on_limitOperationChangeButton_clicked()
         ui->oldOperationLimitEdit->setText("");
         ui->newOperationLimitEdit->setText("");
     }
-
 }
