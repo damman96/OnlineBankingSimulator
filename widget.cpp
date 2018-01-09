@@ -29,7 +29,7 @@ void Widget::on_loginButton_clicked()
     username = ui->usernameEdit->text();
     password = ui->passwordEdit->text();
 
-    int check = ci.dataLogin(username, password);
+    int check = ci.getLoginData(username, password);
 
     if(check == 0)
     {
@@ -38,11 +38,12 @@ void Widget::on_loginButton_clicked()
         ui->stackedWidget->addWidget(ui->mainPage);
         ui->stackedWidget->setCurrentWidget(ui->mainPage);
 
+        _username = ci.getUsername();
+        ci.getPersonalInformation(_username);
         _name = ci.getName();
         _surname = ci.getSurname();
         QString txt = "Zalogowany jako: " + _name + " " + _surname;
         ui->clientLabel->setText(txt);
-        _username = ci.getUsername();
         ui->idlabel->setText("Nr klienta: " + _username);
         _balance = ci.getBalance();
         QString _balanceString=QString::number(_balance);
@@ -133,7 +134,7 @@ void Widget::on_makeTransferButton_clicked()
 
     if(check == true)
     {
-        if(transactions < transactionsLimit && operations < operationsLimit)
+        if(transactions < transactionsLimit && operations < operationsLimit && amount<transactionsLimit)
         {
             ti.getRecipientData(recipientAccountNumber);
             ti.getSenderData(_name, _username, _surname, _accountNumber, _balance, transactions, operations);
@@ -141,7 +142,7 @@ void Widget::on_makeTransferButton_clicked()
             ti.updateSender(amount, _accountNumber);
             ti.updateRecipientTransactions(amount, title);
             ti.updateSenderTransactions(amount, title, recipientString);
-            ti.updateTransactions(_username);
+            ti.updateTransactions(_username, amount);
             ti.updateOperations(_username);
 
             ui->transferStatusLabel->setText("Przelew wykonany pomyślnie!");
@@ -163,6 +164,25 @@ void Widget::on_backButton_clicked()
     ui->mainPage->show();
     ui->stackedWidget->addWidget(ui->mainPage);
     ui->stackedWidget->setCurrentWidget(ui->mainPage);
+
+    ci.getPersonalInformation(_username);
+    _balance = ci.getBalance();
+    QString _balanceString=QString::number(_balance);
+    ui->balanceLabel->setText(_balanceString);
+
+    QSqlQueryModel * modal = new QSqlQueryModel();
+    QSqlQuery qry;
+    qry.prepare("SELECT DATE, PERSON, ACCNUMBER, TITLE, KINDOFOPER, AMOUNT FROM transactions WHERE USERNAME='"+username+"' ORDER BY DATE DESC");
+    qry.exec();
+    modal->setQuery(qry);
+    modal->setHeaderData(0,Qt::Horizontal,"Data");
+    modal->setHeaderData(1,Qt::Horizontal,"Nadawca/ Odbiorca");
+    modal->setHeaderData(2,Qt::Horizontal,"Nr konta");
+    modal->setHeaderData(3,Qt::Horizontal,"Tytuł");
+    modal->setHeaderData(4,Qt::Horizontal,"Rodzaj operacji");
+    modal->setHeaderData(5,Qt::Horizontal,"Kwota");
+    ui->transactionTable->setModel(modal);
+    ui->transactionTable->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 }
 
 void Widget::on_settingsButton_clicked()
@@ -171,6 +191,25 @@ void Widget::on_settingsButton_clicked()
     ui->settingsPage->show();
     ui->stackedWidget->addWidget(ui->settingsPage);
     ui->stackedWidget->setCurrentWidget(ui->settingsPage);
+
+    ci.getPersonalInformation(_username);
+    _balance = ci.getBalance();
+    QString _balanceString=QString::number(_balance);
+    ui->balanceLabel->setText(_balanceString);
+
+    QSqlQueryModel * modal = new QSqlQueryModel();
+    QSqlQuery qry;
+    qry.prepare("SELECT DATE, PERSON, ACCNUMBER, TITLE, KINDOFOPER, AMOUNT FROM transactions WHERE USERNAME='"+username+"' ORDER BY DATE DESC");
+    qry.exec();
+    modal->setQuery(qry);
+    modal->setHeaderData(0,Qt::Horizontal,"Data");
+    modal->setHeaderData(1,Qt::Horizontal,"Nadawca/ Odbiorca");
+    modal->setHeaderData(2,Qt::Horizontal,"Nr konta");
+    modal->setHeaderData(3,Qt::Horizontal,"Tytuł");
+    modal->setHeaderData(4,Qt::Horizontal,"Rodzaj operacji");
+    modal->setHeaderData(5,Qt::Horizontal,"Kwota");
+    ui->transactionTable->setModel(modal);
+    ui->transactionTable->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 }
 
 void Widget::on_backSettingsButton_clicked()

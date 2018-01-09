@@ -6,25 +6,16 @@ customerInfo::customerInfo()
 
 }
 
-int customerInfo::dataLogin(QString username, QString password)
+int customerInfo::getLoginData(QString username, QString password)
 {
     QSqlQuery qry;
 
-    if(qry.exec("SELECT USERNAME, PASSWORD, NAME, SURNAME, BALANCE, TRANSACTIONS_LIMIT, ACCOUNT_NUMBER, OPERATIONS_LIMIT, CREDIT, NOWL, TRANSACTIONS, OPERATIONS FROM customers WHERE USERNAME='"+username+"' AND PASSWORD='"+password+"'"))
+    if(qry.exec("SELECT USERNAME, NOWL FROM customers WHERE USERNAME='"+username+"' AND PASSWORD='"+password+"'"))
     {
         if(qry.next())
         {                            
             _username = qry.value(0).toString();
-            _name = qry.value(2).toString();
-            _surname = qry.value(3).toString();
-            _balance = qry.value(4).toDouble();
-            _transactionsLimit = qry.value(5).toInt();
-            _accountNumber = qry.value(6).toString();
-            _operationsLimit = qry.value(7).toInt();
-            _credit = qry.value(8).toInt();
-            _nowl = qry.value(9).toInt();
-            _transactions = qry.value(10).toDouble();
-            _operations = qry.value(11).toInt();
+            _nowl = qry.value(1).toInt();
 
             if(_nowl < defNOWL)
                 return 0;
@@ -49,6 +40,25 @@ int customerInfo::dataLogin(QString username, QString password)
             return -1;
         }
     }
+}
+
+void customerInfo::getPersonalInformation(QString username)
+{
+    QSqlQuery qry;
+    qry.exec("SELECT NAME, SURNAME, BALANCE, TRANSACTIONS_LIMIT, ACCOUNT_NUMBER, OPERATIONS_LIMIT, CREDIT, TRANSACTIONS, OPERATIONS FROM customers WHERE USERNAME='"+username+"'");
+    if(qry.next())
+    {
+        _name = qry.value(0).toString();
+        _surname = qry.value(1).toString();
+        _balance = qry.value(2).toDouble();
+        _transactionsLimit = qry.value(3).toInt();
+        _accountNumber = qry.value(4).toString();
+        _operationsLimit = qry.value(5).toInt();
+        _credit = qry.value(6).toInt();
+        _transactions = qry.value(7).toDouble();
+        _operations = qry.value(8).toInt();
+    }
+
 }
 
 bool customerInfo::changePassword(QString password,QString oldPassword,QString newPassword)

@@ -40,9 +40,9 @@ void transactioninfo::getSenderData(QString senderName, QString senderUsername, 
 
 }
 
-void transactioninfo::updateTransactions(QString Username)
+void transactioninfo::updateTransactions(QString Username, double amount)
 {
-    _senderTransactions+=1;
+    _senderTransactions+=amount;
     QString transactionsString = QString::number(_senderTransactions);
     QSqlQuery qry;
     qry.exec("UPDATE customers SET TRANSACTIONS='"+transactionsString+"' WHERE USERNAME='"+Username+"'");

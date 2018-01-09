@@ -17,7 +17,7 @@ public:
     void updateRecipientTransactions(double amount, QString title);
     void updateSenderTransactions(double amount, QString title, QString person);
     void getSenderData(QString senderName, QString senderUsername, QString senderSurname, QString senderAccNumber, double senderBalance, int senderTransactions, int senderOperations);
-    void updateTransactions(QString Username);
+    void updateTransactions(QString Username, double amount);
     void updateOperations(QString Username);
 
 private:   

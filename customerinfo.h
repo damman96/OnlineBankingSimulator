@@ -7,7 +7,8 @@ class customerInfo
 {
 public:
     customerInfo();
-    int dataLogin(QString username, QString password);
+    int getLoginData(QString username, QString password);
+    void getPersonalInformation(QString username);
     bool changePassword(QString password,QString oldPassword,QString newPassword);
     bool changeTransactionsLimit(QString username, QString oldLimit, QString newLimit);
     bool changeOperationsLimit(QString username, QString oldLimit, QString newLimit);
