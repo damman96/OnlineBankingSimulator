@@ -110,18 +110,29 @@ void Widget::on_transferButton_clicked()
     ui->stackedWidget->addWidget(ui->transferPage);
     ui->stackedWidget->setCurrentWidget(ui->transferPage);
 
-    double _balance = ci.getBalance();
+    _balance = ci.getBalance();
     QString _balanceString = QString::number(_balance);
     transactionsLimit = ci.getTransactionsLimit();
     QString _transactionsLimitString = QString::number(transactionsLimit);
+    transactions = ci.getTransactions();
+    QString _transactionsString = QString::number(transactions);
+    operations = ci.getOperations();
+    QString _operationsString = QString::number(operations);
     operationsLimit = ci.getOperationsLimit();
     QString _operationsLimitString = QString::number(operationsLimit);
     _accountNumber = ci.getAccountNumber();
+
+    possibleTransactions = transactionsLimit - transactions;
+    QString possTran = QString::number(possibleTransactions);
+    possibleOperations = operationsLimit - operations;
+    QString possOper = QString::number(possibleOperations);
 
     currentDate = ti.getCurrentDate();
     ui->balanceLabel_2->setText(_balanceString);
     ui->limitHeightLabel->setText(_transactionsLimitString);
     ui->limitHeightLabel_2->setText(_operationsLimitString);
+    ui->limitHeightTranLabel->setText(possTran);
+    ui->limitHeightOperLabel->setText(possOper);
     ui->accountSenderLabel->setText(_accountNumber);
     ui->dateEdit->setText(currentDate);    
 }
@@ -130,6 +141,7 @@ void Widget::on_makeTransferButton_clicked()
 {
     amountString = ui->amountEdit->text();
     amount = amountString.toDouble();
+
     recipientString = ui->recipientEdit->text();
     title = ui->titleEdit->text();
     recipientAccountNumber = ui->accountEdit->text();
@@ -141,7 +153,7 @@ void Widget::on_makeTransferButton_clicked()
 
     if(check == true)
     {
-        if(transactions < transactionsLimit && operations < operationsLimit && amount<transactionsLimit)
+        if(transactions < possibleTransactions && operations < possibleOperations && amount <= possibleTransactions)
         {
             ti.getRecipientData(recipientAccountNumber);
             ti.getSenderData(_name, _username, _surname, _accountNumber, _balance, transactions, operations);
@@ -153,16 +165,72 @@ void Widget::on_makeTransferButton_clicked()
             ti.updateOperations(_username);
 
             ui->transferStatusLabel->setText("Przelew wykonany pomyślnie!");
+            ui->amountEdit->setText("");
+            ui->recipientEdit->setText("");
+            ui->titleEdit->setText("");
+            ui->accountEdit->setText("");
+            amount = 0.0;
+            amountString = "";
+            recipientString = "";
+            title = "";
+            recipientAccountNumber = "";
+
+            ci.getPersonalInformation(_username);
+            _balance = ci.getBalance();
+            QString _balanceString = QString::number(_balance);
+            transactionsLimit = ci.getTransactionsLimit();
+            QString _transactionsLimitString = QString::number(transactionsLimit);
+            transactions = ci.getTransactions();
+            QString _transactionsString = QString::number(transactions);
+            operations = ci.getOperations();
+            QString _operationsString = QString::number(operations);
+            operationsLimit = ci.getOperationsLimit();
+            QString _operationsLimitString = QString::number(operationsLimit);
+            _accountNumber = ci.getAccountNumber();
+
+            possibleTransactions = transactionsLimit - transactions;
+            QString possTran = QString::number(possibleTransactions);
+            possibleOperations = operationsLimit - operations;
+            QString possOper = QString::number(possibleOperations);
+
+            currentDate = ti.getCurrentDate();
+            ui->balanceLabel_2->setText(_balanceString);
+            ui->limitHeightLabel->setText(_transactionsLimitString);
+            ui->limitHeightLabel_2->setText(_operationsLimitString);
+            ui->limitHeightTranLabel->setText(possTran);
+            ui->limitHeightOperLabel->setText(possOper);
+            ui->accountSenderLabel->setText(_accountNumber);
+            ui->dateEdit->setText(currentDate);
+
         }
         else
         {
             ui->transferStatusLabel->setText("Przekroczono dzienny limit wysokości transakcji lub operacji");
+            ui->amountEdit->setText("");
+            ui->recipientEdit->setText("");
+            ui->titleEdit->setText("");
+            ui->accountEdit->setText("");
+            amount = 0.0;
+            amountString = "";
+            recipientString = "";
+            title = "";
+            recipientAccountNumber = "";
         }
     }
     else
     {
         ui->transferStatusLabel->setText("Nie masz wystarczających środków na koncie!");
+        ui->amountEdit->setText("");
+        ui->recipientEdit->setText("");
+        ui->titleEdit->setText("");
+        ui->accountEdit->setText("");
+        amount = 0.0;
+        amountString = "";
+        recipientString = "";
+        title = "";
+        recipientAccountNumber = "";
     }
+
 }
 
 void Widget::on_backButton_clicked()

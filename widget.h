@@ -52,8 +52,8 @@ public:
 
     QString oldPassword, newPassword;
 
-    double transactionsLimit, transactions;
-    int operationsLimit, operations;
+    double transactionsLimit, transactions, possibleTransactions;
+    int operationsLimit, operations, possibleOperations;
 
     QString oldLimit, newLimit, oldOperLimit, newOperLimit;
 
