@@ -45,7 +45,7 @@ int customerInfo::getLoginData(QString username, QString password)
 void customerInfo::getPersonalInformation(QString username)
 {
     QSqlQuery qry;
-    qry.exec("SELECT NAME, SURNAME, BALANCE, TRANSACTIONS_LIMIT, ACCOUNT_NUMBER, OPERATIONS_LIMIT, CREDIT, TRANSACTIONS, OPERATIONS FROM customers WHERE USERNAME='"+username+"'");
+    qry.exec("SELECT NAME, SURNAME, BALANCE, TRANSACTIONS_LIMIT, ACCOUNT_NUMBER, OPERATIONS_LIMIT, CREDIT, TRANSACTIONS, OPERATIONS, LASTLOGIN FROM customers WHERE USERNAME='"+username+"'");
     if(qry.next())
     {
         _name = qry.value(0).toString();
@@ -57,6 +57,7 @@ void customerInfo::getPersonalInformation(QString username)
         _credit = qry.value(6).toInt();
         _transactions = qry.value(7).toDouble();
         _operations = qry.value(8).toInt();
+        _lastLoginDate = qry.value(9).toString();
     }
 
 }
@@ -92,6 +93,23 @@ bool customerInfo::changeOperationsLimit(QString username, QString oldLimit, QSt
         return true;
     }
     else return false;
+}
+
+QString customerInfo::getCurrentDate()
+{
+    QDate currentDate = QDate::currentDate();
+    QString currDate = currentDate.toString(Qt::DefaultLocaleShortDate);
+
+    QTime currentTime = QTime::currentTime();
+    QString currTime = currentTime.toString("hh:mm:ss");
+    loginDate = currDate + " o godz. " + currTime;
+    return loginDate;
+}
+
+void customerInfo::udpatelastLoginDate(QString username)
+{
+    QSqlQuery qry;
+    qry.exec("UPDATE customers SET LASTLOGIN = '"+loginDate+"' WHERE USERNAME = '"+username+"'");
 }
 
 QString customerInfo::getUsername()
@@ -142,4 +160,9 @@ int customerInfo::getOperations()
 int customerInfo::getCredit()
 {
     return _credit;
+}
+
+QString customerInfo:: getLastLoginDate()
+{
+    return _lastLoginDate;
 }

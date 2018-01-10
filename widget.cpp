@@ -62,6 +62,13 @@ void Widget::on_loginButton_clicked()
         modal->setHeaderData(5,Qt::Horizontal,"Kwota");
         ui->transactionTable->setModel(modal);
         ui->transactionTable->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+
+        ci.getCurrentDate();
+        QString loginDate = ci.getLastLoginDate();
+        QString finalLoginDate = "Ostatnio zalogowany " + loginDate;
+        ui->lastLoginLabel->setText(finalLoginDate);
+
+        ci.udpatelastLoginDate(_username);
     }
     else if(check == -1)
     {

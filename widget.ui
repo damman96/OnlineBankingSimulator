@@ -181,7 +181,7 @@
      </property>
      <property name="font">
       <font>
-       <pointsize>10</pointsize>
+       <pointsize>12</pointsize>
        <weight>50</weight>
        <bold>false</bold>
       </font>
@@ -204,7 +204,7 @@
      </property>
      <property name="font">
       <font>
-       <pointsize>10</pointsize>
+       <pointsize>12</pointsize>
        <weight>50</weight>
        <bold>false</bold>
       </font>
@@ -222,8 +222,8 @@
     <widget class="QLabel" name="label">
      <property name="geometry">
       <rect>
-       <x>1150</x>
-       <y>60</y>
+       <x>1140</x>
+       <y>110</y>
        <width>170</width>
        <height>20</height>
       </rect>
@@ -245,8 +245,8 @@
     <widget class="QLabel" name="balanceLabel">
      <property name="geometry">
       <rect>
-       <x>1160</x>
-       <y>90</y>
+       <x>1150</x>
+       <y>140</y>
        <width>150</width>
        <height>20</height>
       </rect>
@@ -326,6 +326,27 @@
      </property>
      <property name="text">
       <string>Ustawienia</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lastLoginLabel">
+     <property name="geometry">
+      <rect>
+       <x>1030</x>
+       <y>50</y>
+       <width>320</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
      </property>
     </widget>
    </widget>
