@@ -7,12 +7,10 @@ bool database::connection_open()
 
     if(!mydb.open())
     {
-        //qDebug()<<("FAILED TO OPEN DB");
         return false;
     }
     else
     {
-        //qDebug()<<("CONNECTED");
         return true;
     }
 }

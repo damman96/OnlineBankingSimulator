@@ -40,7 +40,7 @@ private:
     double _transactions;
     int _operations;
 
-    QString _lastLoginDate, loginDate;;
+    QString _lastLoginDate, loginDate;
 };
 
 #endif // CUSTOMERINFO_H

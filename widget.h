@@ -41,7 +41,7 @@ private slots:
 
     void on_limitOperationChangeButton_clicked();
 
-public:
+private:
     QString username, password;
 
     QString _name, _username, _surname, _accountNumber;
