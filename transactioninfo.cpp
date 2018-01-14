@@ -13,6 +13,53 @@ bool transactioninfo::checkAccountBalance(double balance, double amount)
     else return false;
 }
 
+bool transactioninfo::checkAmount(QString amount)
+{
+    int lngth = amount.length();
+    if(lngth <= 7)
+    {
+        for(int i=0; i< amount.length(); i++)
+        {
+            if(amount[i]=="0" || amount[i]=="1" || amount[i]=="2" || amount[i]=="3" || amount[i]=="4" || amount[i]=="5" || amount[i]=="6"
+                                            || amount[i]=="7" || amount[i]=="8" || amount[i]=="9" || amount[i]=="0" || amount[i]=="0" || amount[i] ==".")
+                            return true;
+
+        }
+    }
+    else return false;
+}
+
+bool transactioninfo::checkRecipient(QString recipient)
+{
+    if(recipient!="")
+        return true;
+    else return false;
+}
+
+bool transactioninfo::checkTitle(QString title)
+{
+    if(title!="")
+        return true;
+    else return false;
+}
+
+bool transactioninfo::checkAccNumber(QString accNumber)
+{
+    int lngth = accNumber.length();
+
+    if(lngth == 32)
+    {
+        for(int i=0; i< accNumber.length(); i++)
+        {
+            if(accNumber[i]=="0" || accNumber[i]=="1" || accNumber[i]=="2" || accNumber[i]=="3" || accNumber[i]=="4" || accNumber[i]=="5" || accNumber[i]=="6"
+                                            || accNumber[i]=="7" || accNumber[i]=="8" || accNumber[i]=="9" || accNumber[i]=="0" || accNumber[i]=="0" || accNumber[i] ==" ")
+                            return true;
+
+        }
+    }
+    else return false;
+}
+
 void transactioninfo::getRecipientData(QString accountNumber)
 {
     QSqlQuery qry;

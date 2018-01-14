@@ -19,7 +19,10 @@ public:
     void getSenderData(QString senderName, QString senderUsername, QString senderSurname, QString senderAccNumber, double senderBalance, int senderTransactions, int senderOperations);
     void updateTransactions(QString Username, double amount);
     void updateOperations(QString Username);
-    bool checkAmount(double amount);
+    bool checkAmount(QString amount);
+    bool checkRecipient(QString recipient);
+    bool checkTitle(QString title);
+    bool checkAccNumber(QString accNumber);
 
 private:   
     QString _currentDate;

@@ -64,10 +64,12 @@ void customerInfo::getPersonalInformation(QString username)
 
 bool customerInfo::changePassword(QString password,QString oldPassword,QString newPassword)
 {
-    if(oldPassword==password)
+    if(oldPassword==password && _operations < _operationsLimit)
     {
+        _operations+=1;
+        QString operString = QString::number(_operations);
         QSqlQuery qry;
-        qry.exec("UPDATE customers SET PASSWORD = '"+newPassword+"' WHERE PASSWORD = '"+password+"'");
+        qry.exec("UPDATE customers SET PASSWORD = '"+newPassword+"', OPERATIONS = '"+operString+"' WHERE PASSWORD = '"+password+"'");
         return true;
     }
     else return false;
@@ -75,10 +77,12 @@ bool customerInfo::changePassword(QString password,QString oldPassword,QString n
 
 bool customerInfo::changeTransactionsLimit(QString username, QString oldLimit, QString newLimit)
 {
-    if(oldLimit!=newLimit && newLimit!="0")
+    if(oldLimit!=newLimit && newLimit!="0" && _operations < _operationsLimit)
     {
+        _operations+=1;
+        QString operString = QString::number(_operations);
         QSqlQuery qry;
-        qry.exec("UPDATE customers SET TRANSACTIONS_LIMIT = '"+newLimit+"' WHERE USERNAME = '"+username+"'");
+        qry.exec("UPDATE customers SET TRANSACTIONS_LIMIT = '"+newLimit+"', OPERATIONS = '"+operString+"' WHERE USERNAME = '"+username+"'");
         return true;
     }
     else return false;
@@ -86,10 +90,12 @@ bool customerInfo::changeTransactionsLimit(QString username, QString oldLimit, Q
 
 bool customerInfo::changeOperationsLimit(QString username, QString oldLimit, QString newLimit)
 {
-    if(oldLimit!=newLimit && newLimit!="0")
+    if(oldLimit!=newLimit && newLimit!="0" && _operations < _operationsLimit)
     {
+        _operations+=1;
+        QString operString = QString::number(_operations);
         QSqlQuery qry;
-        qry.exec("UPDATE customers SET OPERATIONS_LIMIT = '"+newLimit+"' WHERE USERNAME = '"+username+"'");
+        qry.exec("UPDATE customers SET OPERATIONS_LIMIT = '"+newLimit+"', OPERATIONS = '"+operString+"' WHERE USERNAME = '"+username+"'");
         return true;
     }
     else return false;

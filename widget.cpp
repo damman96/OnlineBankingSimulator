@@ -46,8 +46,7 @@ void Widget::on_loginButton_clicked()
         ui->clientLabel->setText(txt);
         ui->idlabel->setText("Nr klienta: " + _username);
         _balance = ci.getBalance();
-        QString _balanceString=QString::number(_balance);
-        ui->balanceLabel->setText(_balanceString);
+        ui->balanceLabel->setNum(_balance);
 
         QSqlQueryModel * modal = new QSqlQueryModel();
         QSqlQuery qry;
@@ -111,15 +110,10 @@ void Widget::on_transferButton_clicked()
     ui->stackedWidget->setCurrentWidget(ui->transferPage);
 
     _balance = ci.getBalance();
-    QString _balanceString = QString::number(_balance);
     transactionsLimit = ci.getTransactionsLimit();
-    QString _transactionsLimitString = QString::number(transactionsLimit);
     transactions = ci.getTransactions();
-    QString _transactionsString = QString::number(transactions);
     operations = ci.getOperations();
-    QString _operationsString = QString::number(operations);
     operationsLimit = ci.getOperationsLimit();
-    QString _operationsLimitString = QString::number(operationsLimit);
     _accountNumber = ci.getAccountNumber();
 
     possibleTransactions = transactionsLimit - transactions;
@@ -128,10 +122,10 @@ void Widget::on_transferButton_clicked()
     QString possOper = QString::number(possibleOperations);
 
     currentDate = ti.getCurrentDate();
-    ui->balanceLabel_2->setText(_balanceString);
-    ui->limitHeightLabel->setText(_transactionsLimitString);
-    ui->limitHeightLabel_2->setText(_operationsLimitString);
-    ui->limitHeightTranLabel->setText(possTran);
+    ui->balanceLabel_2->setNum(_balance);
+    ui->limitHeightLabel->setNum(transactionsLimit);
+    ui->limitHeightLabel_2->setNum(operationsLimit);
+    ui->limitHeightTranLabel->setNum(possibleTransactions);
     ui->limitHeightOperLabel->setText(possOper);
     ui->accountSenderLabel->setText(_accountNumber);
     ui->dateEdit->setText(currentDate);    
@@ -151,9 +145,17 @@ void Widget::on_makeTransferButton_clicked()
 
     bool check = ti.checkAccountBalance(_balance, amount);
 
+    bool check1 = ti.checkAmount(amountString);
+    bool check2 = ti.checkRecipient(recipientString);
+    bool check3 = ti.checkRecipient(recipientString);
+    bool check4 = ti.checkAccNumber(recipientAccountNumber);
+
+    if(check1 == true && check2 == true && check3 == true && check4 == true)
+    {
+
     if(check == true)
     {
-        if(transactions < possibleTransactions && operations < possibleOperations && amount <= possibleTransactions)
+        if(transactions < possibleTransactions && operations < operationsLimit && amount <= possibleTransactions)
         {
             ti.getRecipientData(recipientAccountNumber);
             ti.getSenderData(_name, _username, _surname, _accountNumber, _balance, transactions, operations);
@@ -177,28 +179,21 @@ void Widget::on_makeTransferButton_clicked()
 
             ci.getPersonalInformation(_username);
             _balance = ci.getBalance();
-            QString _balanceString = QString::number(_balance);
             transactionsLimit = ci.getTransactionsLimit();
-            QString _transactionsLimitString = QString::number(transactionsLimit);
             transactions = ci.getTransactions();
-            QString _transactionsString = QString::number(transactions);
             operations = ci.getOperations();
-            QString _operationsString = QString::number(operations);
             operationsLimit = ci.getOperationsLimit();
-            QString _operationsLimitString = QString::number(operationsLimit);
             _accountNumber = ci.getAccountNumber();
 
             possibleTransactions = transactionsLimit - transactions;
-            QString possTran = QString::number(possibleTransactions);
             possibleOperations = operationsLimit - operations;
-            QString possOper = QString::number(possibleOperations);
 
             currentDate = ti.getCurrentDate();
-            ui->balanceLabel_2->setText(_balanceString);
-            ui->limitHeightLabel->setText(_transactionsLimitString);
-            ui->limitHeightLabel_2->setText(_operationsLimitString);
-            ui->limitHeightTranLabel->setText(possTran);
-            ui->limitHeightOperLabel->setText(possOper);
+            ui->balanceLabel_2->setNum(_balance);
+            ui->limitHeightLabel->setNum(transactionsLimit);
+            ui->limitHeightLabel_2->setNum(operationsLimit);
+            ui->limitHeightTranLabel->setNum(possibleTransactions);
+            ui->limitHeightOperLabel->setNum(possibleOperations);
             ui->accountSenderLabel->setText(_accountNumber);
             ui->dateEdit->setText(currentDate);
 
@@ -230,6 +225,11 @@ void Widget::on_makeTransferButton_clicked()
         title = "";
         recipientAccountNumber = "";
     }
+    }
+    else
+    {
+        ui->transferStatusLabel->setText("Nieodpowiednia wartość w którymś z pól!");
+    }
 
 }
 
@@ -242,8 +242,7 @@ void Widget::on_backButton_clicked()
 
     ci.getPersonalInformation(_username);
     _balance = ci.getBalance();
-    QString _balanceString=QString::number(_balance);
-    ui->balanceLabel->setText(_balanceString);
+    ui->balanceLabel->setNum(_balance);
 
     QSqlQueryModel * modal = new QSqlQueryModel();
     QSqlQuery qry;
@@ -269,8 +268,7 @@ void Widget::on_settingsButton_clicked()
 
     ci.getPersonalInformation(_username);
     _balance = ci.getBalance();
-    QString _balanceString=QString::number(_balance);
-    ui->balanceLabel->setText(_balanceString);
+    ui->balanceLabel->setNum(_balance);
 
     QSqlQueryModel * modal = new QSqlQueryModel();
     QSqlQuery qry;
