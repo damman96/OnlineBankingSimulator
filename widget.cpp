@@ -117,18 +117,16 @@ void Widget::on_transferButton_clicked()
     _accountNumber = ci.getAccountNumber();
 
     possibleTransactions = transactionsLimit - transactions;
-    QString possTran = QString::number(possibleTransactions);
     possibleOperations = operationsLimit - operations;
-    QString possOper = QString::number(possibleOperations);
 
     currentDate = ti.getCurrentDate();
     ui->balanceLabel_2->setNum(_balance);
     ui->limitHeightLabel->setNum(transactionsLimit);
     ui->limitHeightLabel_2->setNum(operationsLimit);
     ui->limitHeightTranLabel->setNum(possibleTransactions);
-    ui->limitHeightOperLabel->setText(possOper);
+    ui->limitHeightOperLabel->setNum(possibleOperations);
     ui->accountSenderLabel->setText(_accountNumber);
-    ui->dateEdit->setText(currentDate);    
+    ui->dateEdit->setText(currentDate);
 }
 
 void Widget::on_makeTransferButton_clicked()
@@ -153,54 +151,68 @@ void Widget::on_makeTransferButton_clicked()
     if(check1 == true && check2 == true && check3 == true && check4 == true)
     {
 
-    if(check == true)
-    {
-        if(transactions < possibleTransactions && operations < operationsLimit && amount <= possibleTransactions)
+        if(check == true)
         {
-            ti.getRecipientData(recipientAccountNumber);
-            ti.getSenderData(_name, _username, _surname, _accountNumber, _balance, transactions, operations);
-            ti.updateRecipient(amount, recipientAccountNumber);
-            ti.updateSender(amount, _accountNumber);
-            ti.updateRecipientTransactions(amount, title);
-            ti.updateSenderTransactions(amount, title, recipientString);
-            ti.updateTransactions(_username, amount);
-            ti.updateOperations(_username);
+            if(operations < operationsLimit && amount <= possibleTransactions)
+            {
+                ti.getRecipientData(recipientAccountNumber);
+                ti.getSenderData(_name, _username, _surname, _accountNumber, _balance, transactions, operations);
+                ti.updateRecipient(amount, recipientAccountNumber);
+                ti.updateSender(amount, _accountNumber);
+                ti.updateRecipientTransactions(amount, title);
+                ti.updateSenderTransactions(amount, title, recipientString);
+                ti.updateTransactions(_username, amount);
+                ti.updateOperations(_username);
 
-            ui->transferStatusLabel->setText("Przelew wykonany pomyślnie!");
-            ui->amountEdit->setText("");
-            ui->recipientEdit->setText("");
-            ui->titleEdit->setText("");
-            ui->accountEdit->setText("");
-            amount = 0.0;
-            amountString = "";
-            recipientString = "";
-            title = "";
-            recipientAccountNumber = "";
+                ui->transferStatusLabel->setText("Przelew wykonany pomyślnie!");
+                ui->amountEdit->setText("");
+                ui->recipientEdit->setText("");
+                ui->titleEdit->setText("");
+                ui->accountEdit->setText("");
+                amount = 0.0;
+                amountString = "";
+                recipientString = "";
+                title = "";
+                recipientAccountNumber = "";
 
-            ci.getPersonalInformation(_username);
-            _balance = ci.getBalance();
-            transactionsLimit = ci.getTransactionsLimit();
-            transactions = ci.getTransactions();
-            operations = ci.getOperations();
-            operationsLimit = ci.getOperationsLimit();
-            _accountNumber = ci.getAccountNumber();
+                ci.getPersonalInformation(_username);
+                _balance = ci.getBalance();
+                transactionsLimit = ci.getTransactionsLimit();
+                transactions = ci.getTransactions();
+                operations = ci.getOperations();
+                operationsLimit = ci.getOperationsLimit();
+                _accountNumber = ci.getAccountNumber();
 
-            possibleTransactions = transactionsLimit - transactions;
-            possibleOperations = operationsLimit - operations;
+                possibleTransactions = transactionsLimit - transactions;
+                possibleOperations = operationsLimit - operations;
 
-            currentDate = ti.getCurrentDate();
-            ui->balanceLabel_2->setNum(_balance);
-            ui->limitHeightLabel->setNum(transactionsLimit);
-            ui->limitHeightLabel_2->setNum(operationsLimit);
-            ui->limitHeightTranLabel->setNum(possibleTransactions);
-            ui->limitHeightOperLabel->setNum(possibleOperations);
-            ui->accountSenderLabel->setText(_accountNumber);
-            ui->dateEdit->setText(currentDate);
+                currentDate = ti.getCurrentDate();
+                ui->balanceLabel_2->setNum(_balance);
+                ui->limitHeightLabel->setNum(transactionsLimit);
+                ui->limitHeightLabel_2->setNum(operationsLimit);
+                ui->limitHeightTranLabel->setNum(possibleTransactions);
+                ui->limitHeightOperLabel->setNum(possibleOperations);
+                ui->accountSenderLabel->setText(_accountNumber);
+                ui->dateEdit->setText(currentDate);
 
+            }
+            else
+            {
+                ui->transferStatusLabel->setText("Przekroczono dzienny limit wysokości transakcji lub operacji");
+                ui->amountEdit->setText("");
+                ui->recipientEdit->setText("");
+                ui->titleEdit->setText("");
+                ui->accountEdit->setText("");
+                amount = 0.0;
+                amountString = "";
+                recipientString = "";
+                title = "";
+                recipientAccountNumber = "";
+            }
         }
         else
         {
-            ui->transferStatusLabel->setText("Przekroczono dzienny limit wysokości transakcji lub operacji");
+            ui->transferStatusLabel->setText("Nie masz wystarczających środków na koncie!");
             ui->amountEdit->setText("");
             ui->recipientEdit->setText("");
             ui->titleEdit->setText("");
@@ -211,20 +223,6 @@ void Widget::on_makeTransferButton_clicked()
             title = "";
             recipientAccountNumber = "";
         }
-    }
-    else
-    {
-        ui->transferStatusLabel->setText("Nie masz wystarczających środków na koncie!");
-        ui->amountEdit->setText("");
-        ui->recipientEdit->setText("");
-        ui->titleEdit->setText("");
-        ui->accountEdit->setText("");
-        amount = 0.0;
-        amountString = "";
-        recipientString = "";
-        title = "";
-        recipientAccountNumber = "";
-    }
     }
     else
     {
@@ -234,7 +232,11 @@ void Widget::on_makeTransferButton_clicked()
 }
 
 void Widget::on_backButton_clicked()
-{    
+{
+    ui->amountEdit->setText("");
+    ui->recipientEdit->setText("");
+    ui->titleEdit->setText("");
+    ui->accountEdit->setText("");
     ui->loginPage->hide();
     ui->mainPage->show();
     ui->stackedWidget->addWidget(ui->mainPage);
@@ -287,6 +289,9 @@ void Widget::on_settingsButton_clicked()
 
 void Widget::on_backSettingsButton_clicked()
 {
+    ui->passwordStatusLabel->setText("");
+    ui->transactionsStatusLabel->setText("");
+    ui->operationsStatusLabel->setText("");
     ui->settingsPage->hide();
     ui->mainPage->show();
     ui->stackedWidget->addWidget(ui->mainPage);
@@ -307,6 +312,8 @@ void Widget::on_passwordChangeButton_clicked()
         newPassword="";
         ui->oldPasswordEdit->setText("");
         ui->newPasswordEdit->setText("");
+        ui->transactionsStatusLabel->setText("");
+        ui->operationsStatusLabel->setText("");
     }
     else
     {
@@ -315,6 +322,8 @@ void Widget::on_passwordChangeButton_clicked()
         newPassword="";
         ui->oldPasswordEdit->setText("");
         ui->newPasswordEdit->setText("");
+        ui->transactionsStatusLabel->setText("");
+        ui->operationsStatusLabel->setText("");
     }
 
 }
@@ -333,6 +342,8 @@ void Widget::on_limitChangeButton_clicked()
         newLimit="";
         ui->oldTransactionLimitEdit->setText("");
         ui->newTransactionLimitEdit->setText("");
+        ui->passwordStatusLabel->setText("");
+        ui->operationsStatusLabel->setText("");
     }
     else
     {
@@ -341,6 +352,8 @@ void Widget::on_limitChangeButton_clicked()
         newLimit="";
         ui->oldTransactionLimitEdit->setText("");
         ui->newTransactionLimitEdit->setText("");
+        ui->passwordStatusLabel->setText("");
+        ui->operationsStatusLabel->setText("");
     }
 }
 
@@ -358,6 +371,8 @@ void Widget::on_limitOperationChangeButton_clicked()
         newOperLimit="";
         ui->oldOperationLimitEdit->setText("");
         ui->newOperationLimitEdit->setText("");
+        ui->passwordStatusLabel->setText("");
+        ui->transactionsStatusLabel->setText("");
     }
     else
     {
@@ -366,5 +381,7 @@ void Widget::on_limitOperationChangeButton_clicked()
         newOperLimit="";
         ui->oldOperationLimitEdit->setText("");
         ui->newOperationLimitEdit->setText("");
+        ui->passwordStatusLabel->setText("");
+        ui->transactionsStatusLabel->setText("");
     }
 }

@@ -71,8 +71,11 @@ void transactioninfo::getRecipientData(QString accountNumber)
             recipientBalance = qry.value(0).toDouble();
             recipientAccountNumber = qry.value(1).toString();
             recipientUsername = qry.value(2).toString();
+
         }
     }
+    if(recipientAccountNumber=="")
+        recipientAccountNumber=accountNumber;
 }
 
 void transactioninfo::getSenderData(QString senderName, QString senderUsername, QString senderSurname, QString senderAccNumber, double senderBalance, int senderTransactions, int senderOperations)
